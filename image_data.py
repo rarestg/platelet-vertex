@@ -6,8 +6,11 @@ import json
 import cv2
 cwd = os.getcwd()
 
-BASE_URL = 'http://api.athelas.com'
-TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjg5ODQyMzQsImlhdCI6MTYyNjM5MjIzNCwic3ViIjoxODIxLCJpc19kZXZpY2UiOmZhbHNlLCJpc19hZG1pbiI6dHJ1ZSwiaW1wZXJzb25hdG9yX3VzZXJfaWQiOm51bGx9.9_YGgOyMMnY0hZAfY3VnR5q0BmLZas0IrY4wgzmvYko'
+
+# # BASE_URL = 'http://api.athelas.com'
+# BASE_URL = 'http://staging-api.athelas.com'
+# # TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjg5ODQyMzQsImlhdCI6MTYyNjM5MjIzNCwic3ViIjoxODIxLCJpc19kZXZpY2UiOmZhbHNlLCJpc19hZG1pbiI6dHJ1ZSwiaW1wZXJzb25hdG9yX3VzZXJfaWQiOm51bGx9.9_YGgOyMMnY0hZAfY3VnR5q0BmLZas0IrY4wgzmvYko'
+# TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzA3MDM0NTIsImlhdCI6MTYyODExMTQ1Miwic3ViIjoyMzgsImlzX2RldmljZSI6ZmFsc2UsImlzX2FkbWluIjp0cnVlLCJpbXBlcnNvbmF0b3JfdXNlcl9pZCI6bnVsbH0.zTXFGXYXJMBLogQHEca3ED45pDi1lUZml-VyNcWeLfo'
 HEIGHT = 2400
 WIDTH = 3200
 BUCKET = 'platelet-vertex-training/full-platelet-training/training-images/orig-images'
@@ -57,12 +60,17 @@ def create_translated_json_dict(keypoint, NUM_SPLITS):
     json_dict = {'displayName': keypoint['note'], 'xMin': str(xmin), 'yMin': str(ymin), 'xMax': str(xmax), 'yMax': str(ymax)}
     return coord, json_dict
 
-def load_images(job_id, NUM_SPLITS, true=True, save=True):
+def load_images(job_id, NUM_SPLITS, true=True, save=True, database='prod'):
+    if database == 'prod':
+        BASE_URL = 'http://api.athelas.com'
+        TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjg5ODQyMzQsImlhdCI6MTYyNjM5MjIzNCwic3ViIjoxODIxLCJpc19kZXZpY2UiOmZhbHNlLCJpc19hZG1pbiI6dHJ1ZSwiaW1wZXJzb25hdG9yX3VzZXJfaWQiOm51bGx9.9_YGgOyMMnY0hZAfY3VnR5q0BmLZas0IrY4wgzmvYko'
+    else:
+        BASE_URL = 'http://staging-api.athelas.com'
+        TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzA3MDM0NTIsImlhdCI6MTYyODExMTQ1Miwic3ViIjoyMzgsImlzX2RldmljZSI6ZmFsc2UsImlzX2FkbWluIjp0cnVlLCJpbXBlcnNvbmF0b3JfdXNlcl9pZCI6bnVsbH0.zTXFGXYXJMBLogQHEca3ED45pDi1lUZml-VyNcWeLfo'
     endpoint = BASE_URL + '/jobs/' + str(job_id) + '/get_images'
     # print(endpoint)
     response = requests.get(endpoint, headers={ 'Authorization': 'Bearer {}'.format(TOKEN)})
     response = response.json()
-    # print(response)
     image_paths = response['images']
     all_json = []
 
@@ -103,10 +111,10 @@ def load_images(job_id, NUM_SPLITS, true=True, save=True):
     print('COMPLETE')
     return all_json
 
-def load_jobs(jobs, NUM_SPLITS, save=True, true=True):
+def load_jobs(jobs, NUM_SPLITS, save=True, true=True,database='prod'):
     master_json = {}
     for job_id in jobs:
-        file = load_images(job_id, NUM_SPLITS, save=save, true=true)
+        file = load_images(job_id, NUM_SPLITS, save=save, true=true, database=database)
         master_json[job_id] = file
     
     if save:
@@ -122,7 +130,7 @@ def load_jobs(jobs, NUM_SPLITS, save=True, true=True):
 if __name__ == '__main__':
     # job_list = ['200194', '200184', '200260', '200211', '199067', '201497', '201492', '199109', '200241', '200235', '200213', '200202']
     # job_list = ['200194', '200260', '199067', '201497', '200235']
-    job_list = [200235, 199067, 201497, 200260, 200194, 185120, 193878, 193887, 171126, 171045, 205194]
+    job_list = [30902]
     # job_list = [200235]
     job_list = [str(job) for job in job_list]
 

@@ -8,29 +8,25 @@ import image_data
 import draw_boxes
 
 cwd = os.getcwd()
-database = 'staging'
 
 
-job_list = [30225,
-30226,
-30227,
-30228]
+job_list = [30902]
 job_list = [str(job_id) for job_id in job_list]
 
 # do i awnt current model boxes as a json or as a dictionary. 
 # lets do dictionary????
 total_data = {}
 FILENAME = './total_data.p'
-if os.path.isfile(FILENAME):
-    imported_data = pickle.load(open(FILENAME, 'rb'))
-    if imported_data:
-        total_data = imported_data
+# if os.path.isfile(FILENAME):
+#     imported_data = pickle.load(open(FILENAME, 'rb'))
+#     if imported_data:
+#         total_data = imported_data
 
-master_json = image_data.load_jobs(job_list, 2, true=False,save=True, database=database)
+# master_json = image_data.load_jobs(job_list, 2, true=False,save=True)
 
 for image in os.listdir(cwd + '/training-data/training-images/orig-images'):
     prefix = image[:-4]
-    job_id = prefix.split('_')[0]
+    job_id = prefix[:6]
     print(job_id)
     if job_id not in job_list:
         continue
@@ -40,7 +36,6 @@ for image in os.listdir(cwd + '/training-data/training-images/orig-images'):
         continue
     if image[-4:] != '.jpg':
         continue
-    print('HAHAHAHAH  ')
     try:
         vertex_predictions = request_platelet.predict_image_object_detection_sample(
     project="457995363627",
@@ -58,8 +53,8 @@ for image in os.listdir(cwd + '/training-data/training-images/orig-images'):
         print(e)
         continue
     
-    filename = cwd + '/training-data/json-files/orig-files/' + prefix + '.json'
-    old_model_count = draw_boxes.bound_box(filename, image)
+    # filename = cwd + '/training-data/json-files/orig-files/' + prefix + '.json'
+    # old_model_count = draw_boxes.bound_box(filename, image)
     vertex_count = draw_boxes.bound_box_output(vertex_predictions, image)
     half_vertex_count = draw_boxes.half_bound_box(half_vertex_predictions, image)
 
@@ -67,33 +62,33 @@ for image in os.listdir(cwd + '/training-data/training-images/orig-images'):
     pickle.dump(total_data, open(FILENAME, 'wb'))
 print('TOTAL', total_data)
 
-vertex_dict = {}
-old_model_dict = {}
-half_vertex_dict = {}
+# vertex_dict = {}
+# old_model_dict = {}
+# half_vertex_dict = {}
 
-for key in total_data.keys():
-    print('{}: NewModel vs old: {}'.format(key, total_data[key]['vertex_count'] - total_data[key]['old_model_count']))
-    if key[:7] not in vertex_dict.keys():
-        vertex_dict[key[:7]] = 0
-    vertex_dict[key[:7]] += total_data[key]['vertex_count']
+# for key in total_data.keys():
+#     print('{}: NewModel vs old: {}'.format(key, total_data[key]['vertex_count'] - total_data[key]['old_model_count']))
+#     if key[:7] not in vertex_dict.keys():
+#         vertex_dict[key[:7]] = 0
+#     vertex_dict[key[:7]] += total_data[key]['vertex_count']
 
-    if key[:7] not in old_model_dict.keys():
-        old_model_dict[key[:7]] = 0
-    old_model_dict[key[:7]] += total_data[key]['old_model_count']
+#     if key[:7] not in old_model_dict.keys():
+#         old_model_dict[key[:7]] = 0
+#     old_model_dict[key[:7]] += total_data[key]['old_model_count']
 
-    if key[:7] not in half_vertex_dict.keys():
-        half_vertex_dict[key[:7]] = 0
-    half_vertex_dict[key[:7]] += total_data[key]['half_vertex_count']
+#     if key[:7] not in half_vertex_dict.keys():
+#         half_vertex_dict[key[:7]] = 0
+#     half_vertex_dict[key[:7]] += total_data[key]['half_vertex_count']
 
 
-for key in vertex_dict.keys():
-    vertex_dict[key] = vertex_dict[key]/10.0
-    old_model_dict[key] = old_model_dict[key]/10.0
-    half_vertex_dict[key] = half_vertex_dict[key]/10.0
+# for key in vertex_dict.keys():
+#     vertex_dict[key] = vertex_dict[key]/10.0
+#     old_model_dict[key] = old_model_dict[key]/10.0
+#     half_vertex_dict[key] = half_vertex_dict[key]/10.0
 
-print('VERTEX_DICT', vertex_dict)
-print('OLD MODEL', old_model_dict)
-print('HALF MODEL', half_vertex_dict)
+# print('VERTEX_DICT', vertex_dict)
+# print('OLD MODEL', old_model_dict)
+# print('HALF MODEL', half_vertex_dict)
 
 
 """

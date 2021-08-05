@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "athelas-production",
+  "private_key_id": "29989cb9bb8565d0f62afa16a74b7084d9015e1f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyi0iHbazfMbgL\nWWp8WAtCHn5IDcaRFG3/AyflMBD+Ae0eIXx3sL19LJTJC2I0B3ktX4EEMFvlrYWA\n3lwKy8grxl5nrd4DDSYTO4uV9FJFIvBgr3eaXWuh0ddfoGNcFORV76Tonc6Ncr5u\n8dznKoBtUUHUWS8tu6I6nFst+HX4Bf9YaRMWCs+JAfhL3i3vB29/8iKGXsRwoUek\n/ych71LkD158bPR2PPKiPhUT+wPeV0n3aUcJEgVq69KKjxv0DDFFheX2mIOOewV9\nvTg8Z0pl0LqGB6qx4ZkxPyWc5AEj8YkckyQEbAGsZ++NQqcIEm86MtanxN6I2RRT\nYfpLtLmFAgMBAAECggEAJTyb0pTq6DzKFeHe7dJ9/Jr3+uaWmnTwkO4zUJ8i+Brm\nPXG98AeGKZhV6o0rfM7vNKmVso40aFU1ggA+IYlJNOoBD+4I3smL/phdXxeu3djw\n2bVWxDTGKSBm4vyEJHT9/zdFBTe+V61N7r0WNYcddE8tY9B64Lagmck40gBe+CxM\nHGDpZg8eV2eoqc/AVB+Dzd+LM2cBSo3XO3lvmq/ZiEXLphWXrhBRpQZm9bu3aJTt\nf95GYH8cFJNUS7P7+TJLqca18HCkKFGY6KGO2WgIr4PRifzsZLro36KlerqJAYTN\n7CqiRSQ3zf+f6zeKZ4PX1Z3/Cl1DQ5Mrq5MNbwcogQKBgQDzaPqBLDXNjZltElpG\n6AB6487sjk+jvPgXAcpQuXjWMe3N1SR9YW1/nBiLVLHtAGbOsWJzOmb82cnoF5KN\n9oVlb8cZBE7XgvNUUziYBu7QtVHhsajmTXEA569D707Ia61USX4cKGgtZI68Zk+l\n4+TRmPrcFDO5jjE5TGu2Bfa3BQKBgQC7x2gOZ43DL6i6i59ZFCGkS4mu9BRz4hzD\nvPOhEZdnowidNYxRPD7TRfncb4In011s0EANBo/dZYSMR/gKziZbFO+7bUOw2ZQK\nOIOrxTU8DeZNoqFCXUUlJFnLDhwndG+wJSFpgC8rnftyxR3DABdSMBwG1mgx0Qto\naD5jqWCAgQKBgQCpWADoO3TXJEt4ucr7B8/Fr5Y3t66qkP7dKs6xqMfr5WK30DEJ\n1e2TWWsuDGeZJq1f4cNHvXsHMRIqmbPJdphKASE4Q2oCv8VAhoGaK0CdDXkBF1QV\nng0ffxDNp8Fc6KT3PgYx2t7Xrd0sL9X76Pg55j+pO5jc4JNYdNV/FtkVbQKBgQC7\nrzNyMk6fKKOc0LEUd+qoLFgRZiSLLxVRDyrzcoHCNFIHz93P1Ed3JBn5Gfsdk0Vt\n3TgnzMc+opk5HTXult3/a42x6CQgP1iYXqQ8q3/p5nqqXkKP8mmKFispqZC6XsbD\naFlc+aIsFluc+ygkH5MvsqZQrzy1jhu433h8ZG7wAQKBgAFfgcUGMuv3IPzUhaEh\nUWZmiN3mO4FH3CKRydHrZcd3vWljBRhnHzPzdrF1/29hP8VCZeDQotyEiFSLsESH\nBw1IG2VV8SgJnygXEmm3VFqGQiPWDjPhslWjZnDgM49dEeH1g1vg9YIMKPEU2bKS\ntCCEMmInE2rMYaU92KdRufJb\n-----END PRIVATE KEY-----\n",
+  "client_email": "vertex-account@athelas-production.iam.gserviceaccount.com",
+  "client_id": "100037751640719853547",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vertex-account%40athelas-production.iam.gserviceaccount.com"
+}
